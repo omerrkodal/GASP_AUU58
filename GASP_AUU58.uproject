@@ -74,6 +74,14 @@
 		{
 			"Name": "GameplayInteractions",
 			"Enabled": true
+		},
+		{
+			"Name": "ModelContextProtocol",
+			"Enabled": true
+		},
+		{
+			"Name": "MCPClientToolset",
+			"Enabled": true
 		}
 	],
 	"EpicSampleNameHash": "1673045636"
