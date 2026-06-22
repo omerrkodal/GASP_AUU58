@@ -86,6 +86,10 @@
 		{
 			"Name": "AllToolsets",
 			"Enabled": true
+		},
+		{
+			"Name": "LiveCodingToolset",
+			"Enabled": true
 		}
 	],
 	"EpicSampleNameHash": "1673045636"
