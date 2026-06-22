@@ -59,19 +59,19 @@ void UObjectPool::Deinitialize()
 		return;
 	}
 
-	for (TTuple<TSubclassOf<AActor>, TTuple<TArray<AActor*>, TArray<AActor*>>> Element : Pool)
+	for (auto& Element : Pool)
 	{
-		for (AActor* ActivePoolActor : Element.Value.Key)
+		for (TWeakObjectPtr<AActor>& ActivePoolActor : Element.Value.Key)
 		{
-			if (IsValid(ActivePoolActor))
+			if (ActivePoolActor.IsValid())
 			{
 				ActivePoolActor->Destroy();
 			}
 		}
 
-		for (AActor* InactivePoolActor : Element.Value.Value)
+		for (TWeakObjectPtr<AActor>& InactivePoolActor : Element.Value.Value)
 		{
-			if (IsValid(InactivePoolActor))
+			if (InactivePoolActor.IsValid())
 			{
 				InactivePoolActor->Destroy();
 			}
@@ -102,7 +102,7 @@ bool UObjectPool::Push(AActor* Actor)
 				}
 			}
 
-			TTuple<TArray<AActor*>, TArray<AActor*>>* Subpools = Pool.Find(Actor->GetClass());
+			TTuple<TArray<TWeakObjectPtr<AActor>>, TArray<TWeakObjectPtr<AActor>>>* Subpools = Pool.Find(Actor->GetClass());
 			Subpools->Key.Remove(Actor);
 			Subpools->Value.AddUnique(Actor);
 			IObjectPooledActor::Execute_OnPushedToPool(Actor);
@@ -115,7 +115,7 @@ bool UObjectPool::Push(AActor* Actor)
 
 bool UObjectPool::Pull(const TSubclassOf<AActor> Class, AActor*& Actor_Out)
 {
-	TTuple<TArray<AActor*>, TArray<AActor*>>* Subpool = Pool.Find(Class);
+	TTuple<TArray<TWeakObjectPtr<AActor>>, TArray<TWeakObjectPtr<AActor>>>* Subpool = Pool.Find(Class);
 	if (!Subpool)
 	{
 		if (!AddActorType(Class, FPooledActorSettings(0, true)))
@@ -135,13 +135,13 @@ bool UObjectPool::Pull(const TSubclassOf<AActor> Class, AActor*& Actor_Out)
 	AActor* PulledActor = nullptr;
 
 	// inactive pool
-	for (AActor* Element : Subpool->Value)
+	for (TWeakObjectPtr<AActor>& Element : Subpool->Value)
 	{
-		if (IsValid(Element))
+		if (Element.IsValid())
 		{
-			PulledActor = Element;
+			PulledActor = Element.Get();
 			Actor_Out = PulledActor;
-			Subpool->Value.Remove(PulledActor);
+			Subpool->Value.Remove(Element);
 			break;
 		}
 	}
@@ -203,7 +203,7 @@ bool UObjectPool::AddActorType(TSubclassOf<AActor> Class, FPooledActorSettings A
 
 		if (!Pool.Contains(Class))
 		{
-			TArray<AActor*> InactivePool;
+			TArray<TWeakObjectPtr<AActor>> InactivePool;
 
 			ActivePoolSettings.Add(Class, ActorSettings);
 
@@ -219,7 +219,7 @@ bool UObjectPool::AddActorType(TSubclassOf<AActor> Class, FPooledActorSettings A
 				IObjectPooledActor::Execute_OnPushedToPool(NewActor);
 			}
 
-			Pool.Add(Class, TTuple<TArray<AActor*>, TArray<AActor*>>(TArray<AActor*>(), InactivePool));
+			Pool.Add(Class, TTuple<TArray<TWeakObjectPtr<AActor>>, TArray<TWeakObjectPtr<AActor>>>(TArray<TWeakObjectPtr<AActor>>(), InactivePool));
 			return true;
 		}
 	}

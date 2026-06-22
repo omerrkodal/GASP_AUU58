@@ -38,5 +38,5 @@ public:
 	bool AddActorType(TSubclassOf<AActor> Class, FPooledActorSettings ActorSettings);
 
 	// Tuple key = Active pool, Tuple Value = Inactive Pool
-	TMap<TSubclassOf<AActor>, TTuple<TArray<AActor*>, TArray<AActor*>>> Pool;
+	TMap<TSubclassOf<AActor>, TTuple<TArray<TWeakObjectPtr<AActor>>, TArray<TWeakObjectPtr<AActor>>>> Pool;
 };
