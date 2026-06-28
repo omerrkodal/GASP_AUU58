@@ -135,13 +135,13 @@ bool UObjectPool::Pull(const TSubclassOf<AActor> Class, AActor*& Actor_Out)
 	AActor* PulledActor = nullptr;
 
 	// inactive pool
-	for (TWeakObjectPtr<AActor>& Element : Subpool->Value)
+	for (int32 Index = 0; Index < Subpool->Value.Num(); ++Index)
 	{
-		if (Element.IsValid())
+		if (Subpool->Value[Index].IsValid())
 		{
-			PulledActor = Element.Get();
+			PulledActor = Subpool->Value[Index].Get();
 			Actor_Out = PulledActor;
-			Subpool->Value.Remove(Element);
+			Subpool->Value.RemoveAt(Index);
 			break;
 		}
 	}
