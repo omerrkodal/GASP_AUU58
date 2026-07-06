@@ -1,0 +1,78 @@
+{
+    "/Game/_Assets/Equipped/TPS_System/AnimationLibrary/Shotgun/MM_Shotgun_Fire": {
+        "class": "AnimSequence",
+        "controller": "/Engine/Transient.AnimSequencerController_1284",
+        "data_model": "None",
+        "data_model_interface": "/Game/_Assets/Equipped/TPS_System/AnimationLibrary/Shotgun/MM_Shotgun_Fire.MM_Shotgun_Fire:AnimationSequencerDataModel",
+        "sequence_length": 0.6666666865348816
+    },
+    "/Game/_Assets/Equipped/TPS_System/AnimationLibrary/Shotgun/MM_Shotgun_Fire_Montage": {
+        "class": "AnimMontage",
+        "blend_mode_in": "<MontageBlendMode.STANDARD: 0>",
+        "blend_mode_out": "<MontageBlendMode.STANDARD: 0>",
+        "blend_profile_in": "None",
+        "blend_profile_out": "None",
+        "controller": "/Engine/Transient.AnimDataController_82",
+        "data_model": "None",
+        "data_model_interface": "/Game/_Assets/Equipped/TPS_System/AnimationLibrary/Shotgun/MM_Shotgun_Fire_Montage.MM_Shotgun_Fire_Montage:AnimDataModel",
+        "sequence_length": 0.6666666865348816,
+        "slot_anim_tracks": [
+            "<Struct 'SlotAnimationTrack' (0x000000050D2BFEA0) {slot_name: \"FireSlot\", anim_track: {anim_segments: ((CachedPlayLength=0.666667,AnimReference=\"/Script/Engine.AnimSequence'/Game/_Assets/Equipped/TPS_System/AnimationLibrary/Shotgun/MM_Shotgun_Fire.MM_Shotgun_Fire'\",AnimEndTime=0.666667))}}>"
+        ]
+    },
+    "/Game/_Assets/Equipped/MilitaryWeapSilver/Weapons/Animations/Fire_Shotgun_W": {
+        "class": "AnimSequence",
+        "controller": "/Engine/Transient.AnimSequencerController_1285",
+        "data_model": "None",
+        "data_model_interface": "/Game/_Assets/Equipped/MilitaryWeapSilver/Weapons/Animations/Fire_Shotgun_W.Fire_Shotgun_W:AnimationSequencerDataModel",
+        "sequence_length": 1.3333333730697632
+    },
+    "/Game/_Assets/Equipped/TPS_System/Weapons/LyraAudio/Sounds/Weapons/Shotgun/MSS_Weapons_Shotgun_Fire": {
+        "class": "MetaSoundSource",
+        "block_rate_override": "<Struct 'PerPlatformFloat' (0x0000000309480FB0) {default: 0.000000}>",
+        "bus_sends": [],
+        "bypass_volume_scale_for_priority": "False",
+        "channel_agnostic_custom_format": "Cat:Mono1Dot0",
+        "channel_agnostic_format_chooser": "<MetasoundChannelAgnosticSourceFormatChooser.AUTO: 0>",
+        "concurrency_overrides": "<Struct 'SoundConcurrencySettings' (0x00000003094800F8) {max_count: 16, limit_to_owner: False, volume_scale_can_release: False, enable_max_count_platform_scaling: False, resolution_rule: StopFarthestThenOldest, retrigger_time: 0.000000, platform_max_count: {default: 16}, volume_scale_mode: Default, volume_scale_attack_time: 0.010000, volume_scale_release_time: 0.500000, voice_steal_release_time: 0.000000}>",
+        "concurrency_set": "set([\"/Script/Engine.SoundConcurrency'/Game/_Assets/Equipped/TPS_System/Weapons/LyraAudio/Concurrency/SCON_Guns_LimitToOwner.SCON_Guns_LimitToOwner'\", \"/Script/Engine.SoundConcurrency'/Game/_Assets/Equipped/TPS_System/Weapons/LyraAudio/Concurrency/SCON_Guns_StopFarthest.SCON_Guns_StopFarthest'\"])",
+        "cue_points": [],
+        "duration": "9999.0",
+        "enable_bus_sends": "True",
+        "manual_word_wrap": "False",
+        "mature": "False",
+        "max_distance": "15100.0",
+        "modulation_settings": "<Struct 'SoundModulationDefaultRoutingSettings' (0x0000000309480280) {volume_modulation_destination: {value: 0.000000, modulators: ()}, pitch_modulation_destination: {value: 0.000000, modulators: ()}, highpass_modulation_destination: {value: 20.000000, modulators: ()}, lowpass_modulation_destination: {value: 20000.000000, modulators: ()}, volume_routing: Inherit, pitch_routing: Inherit, highpass_routing: Inherit, lowpass_routing: Inherit}>",
+        "output_format": "<MetaSoundOutputAudioFormat.STEREO: 1>",
+        "override_concurrency": "False",
+        "post_attenuation_bus_sends": [],
+        "pre_effect_bus_sends": [],
+        "priority": "50.0",
+        "quality_setting": "None",
+        "sample_rate_override": "<Struct 'PerPlatformInt' (0x0000000309481008) {default: 0}>",
+        "single_line": "False",
+        "sound_class_object": "/Game/_Assets/Equipped/TPS_System/Weapons/LyraAudio/Classes/SFX.SFX",
+        "sound_submix_object": "/Game/_Assets/Equipped/TPS_System/Weapons/LyraAudio/Submixes/SFXSubmix.SFXSubmix",
+        "sound_submix_sends": [
+            "<Struct 'SoundSubmixSendInfo' (0x00000003F7A25BE0) {send_level_control_method: Manual, sound_submix: \"/Script/Engine.SoundSubmix'/Game/_Assets/Equipped/TPS_System/Weapons/LyraAudio/Submixes/EarlyReflectionsSubmix.EarlyReflectionsSubmix'\", send_level: 1.000000, disable_manual_send_clamp: False, min_send_level: 0.000000, max_send_level: 1.000000, min_send_distance: 100.000000, max_send_distance: 1000.000000, custom_send_level_curve: {}, enable_lpf_cutoff: False, lpf_cutoff: 20000.000000, enable_hpf_cutoff: False, hpf_cutoff: 20.000000, send_stage: PostDistanceAttenuation}>"
+        ],
+        "source_effect_chain": "None",
+        "subtitle_priority": "10000.0",
+        "subtitles": [],
+        "total_samples": "0.0",
+        "virtualization_mode": "<VirtualizationMode.RESTART: 2>"
+    },
+    "/Game/_GAME/Data/DataAsset/EquippedItems/Weapon/Shotgun/DA_Shotgun_Anim": {
+        "class": "PDA_Anim_C"
+    },
+    "/Game/_GAME/Data/DataAsset/EquippedItems/Weapon/Shotgun/DA_Shotgun_SFX": {
+        "class": "PDA_SFX_C"
+    },
+    "/Game/_GAME/Data/DataAsset/EquippedItems/Weapon/Shotgun/DA_Shotgun": {
+        "class": "PDA_Equipped_Weapon_C"
+    },
+    "/Game/_Assets/Equipped/TPS_System/Weapons/LyraAudio/AttenuationPresets/ATT_Shotgun": {
+        "class": "SoundAttenuation",
+        "attenuation": "<Struct 'SoundAttenuationSettings' (0x00000002BB6A1430) {distance_algorithm: Logarithmic, attenuation_shape: Sphere, falloff_mode: Continues, d_b_attenuation_at_max: -60.000000, attenuation_shape_extents: {x: 100.000000, y: 0.000000, z: 0.000000}, cone_offset: 0.000000, falloff_distance: 15000.000000, cone_sphere_radius: 0.000000, cone_sphere_falloff_distance: 0.000000, custom_attenuation_curve: {}, attenuate: True, spatialize: True, attenuate_with_lpf: True, enable_listener_focus: False, enable_focus_interpolation: False, enable_occlusion: True, use_complex_collision_for_occlusion: False, enable_reverb_send: False, enable_priority_attenuation: False, apply_normalization_to_stereo_sounds: False, enable_log_frequency_scaling: True, enable_submix_sends: False, enable_source_data_override: False, enable_send_to_audio_link: True, spatialization_algorithm: SPATIALIZATION_HRTF, audio_link_settings_override: None, binaural_radius: 500.000000, custom_lowpass_air_absorption_curve: {}, custom_highpass_air_absorption_curve: {}, absorption_method: Linear, occlusion_trace_channel: ECC_Visibility, reverb_send_method: Linear, priority_attenuation_method: Linear, non_spatialized_radius_start: 150.000000, non_spatialized_radius_end: 0.000000, non_spatialized_radius_mode: OmniDirectional, stereo_spread: 100.000000, lpf_radius_min: 500.000000, lpf_radius_max: 12500.000000, lpf_frequency_at_min: 20000.000000, lpf_frequency_at_max: 1000.000000, hpf_frequency_at_min: 0.000000, hpf_frequency_at_max: 5000.000000, focus_azimuth: 30.000000, non_focus_azimuth: 60.000000, focus_distance_scale: 1.000000, non_focus_distance_scale: 1.000000, focus_priority_scale: 1.000000, non_focus_priority_scale: 1.000000, focus_volume_attenuation: 1.000000, non_focus_volume_attenuation: 1.000000, focus_attack_interp_speed: 1.000000, focus_release_interp_speed: 1.000000, occlusion_low_pass_filter_frequency: 2000.000000, occlusion_volume_attenuation: 0.700000, occlusion_interpolation_time: 0.100000, reverb_wet_level_min: 0.300000, reverb_wet_level_max: 0.950000, reverb_distance_min: 400.000000, reverb_distance_max: 4000.000000, manual_reverb_send_level: 0.000000, priority_attenuation_min: 1.000000, priority_attenuation_max: 1.000000, priority_attenuation_distance_min: 400.000000, priority_attenuation_distance_max: 4000.000000, manual_priority_attenuation: 1.000000, custom_reverb_send_curve: {}, submix_send_settings: , custom_priority_attenuation_curve: {}, plugin_settings: {spatialization_plugin_settings_array: (None), occlusion_plugin_settings_array: , reverb_plugin_settings_array: , source_data_override_plugin_settings_array: }}>"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "/Game/_Assets/Equipped/TPS_System/Weapons/LyraAudio/Concurrency/SCON_Guns_LimitToOwner": {
+        "max_count": 32,
+        "resolution_rule": "<MaxConcurrentResolutionRule.STOP_OLDEST: 1>",
+        "voice_steal_release_time": 0.15000000596046448
+    },
+    "/Game/_Assets/Equipped/TPS_System/Weapons/LyraAudio/Concurrency/SCON_Guns_StopFarthest": {
+        "max_count": 32,
+        "resolution_rule": "<MaxConcurrentResolutionRule.STOP_FARTHEST_THEN_OLDEST: 3>",
+        "voice_steal_release_time": 0.15000000596046448
+    }
+}
