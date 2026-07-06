@@ -167,6 +167,26 @@ bool UObjectPool::Pull(const TSubclassOf<AActor> Class, AActor*& Actor_Out)
 			Actor_Out = PulledActor;
 			return true;
 		}
+		else if (Subpool->Key.Num() > 0)
+		{
+			// Pool is full and cannot expand. Implement FIFO by recycling the oldest active actor.
+			PulledActor = Subpool->Key[0].Get();
+			if (IsValid(PulledActor))
+			{
+				Push(PulledActor); // Pushes to inactive pool, triggering OnPushedToPool (cleanup/hide)
+				
+				// Now it's the last added in the inactive pool (Value), grab it
+				if (Subpool->Value.Num() > 0)
+				{
+					PulledActor = Subpool->Value.Last().Get();
+					Actor_Out = PulledActor;
+					Subpool->Value.RemoveAt(Subpool->Value.Num() - 1);
+					Subpool->Key.AddUnique(PulledActor);
+					IObjectPooledActor::Execute_OnPulledFromPool(PulledActor); // Re-activate
+					return true;
+				}
+			}
+		}
 
 		return false;
 	}
