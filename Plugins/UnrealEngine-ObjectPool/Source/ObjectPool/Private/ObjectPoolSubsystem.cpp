@@ -103,8 +103,8 @@ bool UObjectPool::Push(AActor* Actor)
 			}
 
 			TTuple<TArray<TWeakObjectPtr<AActor>>, TArray<TWeakObjectPtr<AActor>>>* Subpools = Pool.Find(Actor->GetClass());
-			Subpools->Key.Remove(Actor);
-			Subpools->Value.AddUnique(Actor);
+			Subpools->Key.RemoveSwap(Actor);   // O(1): swap-with-last, no array shift
+			Subpools->Value.Add(Actor);         // O(1): pool guarantees no duplicates
 			IObjectPooledActor::Execute_OnPushedToPool(Actor);
 			return true;
 		}
@@ -141,14 +141,14 @@ bool UObjectPool::Pull(const TSubclassOf<AActor> Class, AActor*& Actor_Out)
 		{
 			PulledActor = Subpool->Value[Index].Get();
 			Actor_Out = PulledActor;
-			Subpool->Value.RemoveAt(Index);
+			Subpool->Value.RemoveAtSwap(Index); // O(1): swap-with-last, no array shift
 			break;
 		}
 	}
 
 	if (IsValid(PulledActor))
 	{
-		Subpool->Key.AddUnique(PulledActor);
+		Subpool->Key.Add(PulledActor);         // O(1): pool guarantees no duplicates
 		IObjectPooledActor::Execute_OnPulledFromPool(PulledActor);
 		Actor_Out = PulledActor;
 		return true;
@@ -162,7 +162,7 @@ bool UObjectPool::Pull(const TSubclassOf<AActor> Class, AActor*& Actor_Out)
 			{
 				return false;
 			}
-			Subpool->Key.AddUnique(PulledActor);
+			Subpool->Key.Add(PulledActor);         // O(1): pool guarantees no duplicates
 			IObjectPooledActor::Execute_OnPulledFromPool(PulledActor);
 			Actor_Out = PulledActor;
 			return true;
@@ -180,8 +180,8 @@ bool UObjectPool::Pull(const TSubclassOf<AActor> Class, AActor*& Actor_Out)
 				{
 					PulledActor = Subpool->Value.Last().Get();
 					Actor_Out = PulledActor;
-					Subpool->Value.RemoveAt(Subpool->Value.Num() - 1);
-					Subpool->Key.AddUnique(PulledActor);
+					Subpool->Value.RemoveAtSwap(Subpool->Value.Num() - 1); // O(1): last element, swap is no-op
+					Subpool->Key.Add(PulledActor);         // O(1): pool guarantees no duplicates
 					IObjectPooledActor::Execute_OnPulledFromPool(PulledActor); // Re-activate
 					return true;
 				}
