@@ -103,7 +103,7 @@ bool UObjectPool::Push(AActor* Actor)
 			}
 
 			TTuple<TArray<TWeakObjectPtr<AActor>>, TArray<TWeakObjectPtr<AActor>>>* Subpools = Pool.Find(Actor->GetClass());
-			Subpools->Key.RemoveSwap(Actor);   // O(1): swap-with-last, no array shift
+			Subpools->Key.Remove(Actor);       // Must use Remove to maintain FIFO order for recycling
 			Subpools->Value.Add(Actor);         // O(1): pool guarantees no duplicates
 			IObjectPooledActor::Execute_OnPushedToPool(Actor);
 			return true;
@@ -134,8 +134,8 @@ bool UObjectPool::Pull(const TSubclassOf<AActor> Class, AActor*& Actor_Out)
 
 	AActor* PulledActor = nullptr;
 
-	// inactive pool
-	for (int32 Index = 0; Index < Subpool->Value.Num(); ++Index)
+	// inactive pool - Scan from back so RemoveAtSwap swaps with itself if it's the last element
+	for (int32 Index = Subpool->Value.Num() - 1; Index >= 0; --Index)
 	{
 		if (Subpool->Value[Index].IsValid())
 		{
@@ -235,7 +235,7 @@ bool UObjectPool::AddActorType(TSubclassOf<AActor> Class, FPooledActorSettings A
 					UE_LOG(LogObjectPool, Error, TEXT("AddActorType() failed to spawn new actor"))
 					continue;
 				}
-				InactivePool.AddUnique(NewActor);
+				InactivePool.Add(NewActor); // Freshly spawned in a loop, guaranteed unique
 				IObjectPooledActor::Execute_OnPushedToPool(NewActor);
 			}
 
